@@ -99,6 +99,24 @@
 			{/if}
 		</div>
 	{/if}
+	<p>Recommended Books</p>
+	<div class="recommendations">
+		<div class="book">
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s" alt="book image">
+			<p>Book Title</p>
+			<p>by Author</p>
+		</div>
+		<div class="book">
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s" alt="book image">
+			<p>Book Title</p>
+			<p>by Author</p>
+		</div>
+		<div class="book">
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s" alt="book image">
+			<p>Book Title</p>
+			<p>by Author</p>
+		</div>
+	</div>
 </div>
 <style>
 	.statusWrapper {
@@ -112,5 +130,29 @@
 	.statusWrapper p {
 		margin: 0px;
 		margin-left: 1rem;
+	}
+
+	.recommendations {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.book {
+		background-color: var(--n300);
+		padding: 1rem;
+		border-radius: 0.2rem;
+		width: fit-content;
+		margin:0rem 1rem;
+	}
+
+	.book img {
+		border-radius: 00.2rem;
+	}
+
+	.book p + .book p {
+		margin-top: 1rem;
 	}
 </style>

@@ -6,6 +6,9 @@
 	let button:HTMLButtonElement;
 
 	onMount(()=>{
+		if (document.cookie.includes("loggedIn=true")){
+			document.location="/"
+		}
 		button.type ="submit"
 	})
 </script>

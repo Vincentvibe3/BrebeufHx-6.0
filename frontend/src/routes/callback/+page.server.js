@@ -8,6 +8,9 @@ export async function load({url, cookies}) {
 		cookies.set("token", token, {
 			httpOnly:true
 		})
+		cookies.set("loggedIn", "true", {
+			httpOnly:false
+		})
 		return {
 			status:200
 		}
