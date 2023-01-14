@@ -1,6 +1,5 @@
 <script lang="ts">
 	import {Header, Navbar, Sidebar, SidebarLink} from "nota-ui"
-  	import BookForm from "./BookForm.svelte";
 
 	export let sidebarOpen=false;
 
@@ -27,7 +26,7 @@
 	Book Finder
 </Header>
 <main>
-	<BookForm></BookForm>
+	
 </main>
 <style>
 	main {

@@ -1,0 +1,268 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;700&display=swap');
+
+html {
+	scroll-behavior: smooth;
+}
+
+body{
+	min-width: 100vw;
+	width: fit-content;
+	height: fit-content;
+	margin: 0px;
+}
+
+p {
+	font:var(--body);
+}
+
+h2 {
+	font:var(--heading5)
+}
+
+.svelte-container {
+	min-width: 100vw;
+	width: fit-content;
+	height: fit-content;
+}
+
+/* Define variables */
+:root{
+
+	/* Global Colors */
+
+	/* Primary */
+	--p100:#ffdefb;
+	--p200:#f2c2e3;
+	--p300:#e6a7cb;
+	--p400:#d98bb3;
+	--p500:#cc6f9b;
+	--p600:#bf5383;
+	--p700:#b3386b;
+	--p800:#a31c54;
+	--p900:#99003b;
+
+	/* Secondary */
+	--p100:#def3ff;
+	--p200:#c2d5f2;
+	--p300:#a7b8e6;
+	--p400:#8b9ad9;
+	--p500:#6f7ccc;
+	--p600:#535ebf;
+	--p700:#3841b3;
+	--p800:#1c23a6;
+	--p900:#000599;
+
+	/* Neutral */
+	--n100:#ffffff;
+	--n200:#fafafa;
+	--n300:#f0f0f0;
+	--n400:#c0c0c0;
+	--n500:#909090;
+	--n600:#606060;
+	--n700:#303030;
+	--n800:#161616;
+	--n900:#000000;
+
+	/* Error */
+	--e100:#db8484;
+	--e200:#db5c5c;
+	--e300:#db3434;
+
+	/* Warning */
+	--w100:#dbae84;
+	--w200:#db995c;
+	--w300:#db8434;
+
+	/* Info */
+	--i100:#f2da91;
+	--i200:#f2ce60;
+	--i300:#f2c12e;
+
+	/* Success */
+	--g100:#8bdb84;
+	--g200:#61c758;
+	--g300:#36b32b;
+
+	/* Global Typography */
+
+	/* Family */
+	--font-family:'Work Sans', sans-serif;
+
+	/* Font Styles */
+	--heading1:700 3rem var(--font-family);
+	--heading2:700 2.625rem var(--font-family);
+	--heading3:700 2.25rem var(--font-family);
+	--heading4:700 1.875rem var(--font-family);
+	--heading5:700 1.5rem var(--font-family);
+	--heading6:700 1.25rem var(--font-family);
+	--subtitle:300 1.25rem var(--font-family);
+	--body:400 1rem var(--font-family);
+	--body2:400 0.8125rem var(--font-family);
+	--buttons:600 0.875rem var(--font-family);
+	--caption:400 0.75rem  var(--font-family);
+
+
+	/* Styles */
+
+	/* Button */
+	--btnFont:var(--buttons);
+
+	/* Button Primary */
+	--btnPrimaryBg: var(--p700);
+	--btnPrimaryBgFocus: var(--p900);
+	--btnPrimaryBorder: var(--p600);
+	--btnPrimaryBorderFocus: var(--p800);
+	--btnPrimaryText: var(--n200);
+	--btnPrimaryTextFocus: var(--n200);
+
+	/* Button Secondary */
+	--btnSecondaryBg: transparent;
+	--btnSecondaryBgFocus: var(--p200);
+	--btnSecondaryText: var(--p800);
+	--btnSecondaryTextFocus: var(--p800);
+	--btnSecondaryBorder: var(--p800);
+
+	/* Button Tertiary */
+	--btnTertiaryBg: transparent;
+	--btnTertiaryBgFocus: var(--p200);
+	--btnTertiaryBgFocus: var(--p200);
+	--btnTertiaryText: var(--p800);
+	--btnTertiaryTextFocus: var(--p800);
+
+	/* Button Disabled */
+	--btnDisabledBg:var(--n300);
+	--btnDisabledBorder:var(--n400);
+	--btnDisabledText:var(--n600);
+
+	/* Button Danger */
+	--btnDangerText:var(--n200);
+	--btnDangerTextFocus:var(--n200);
+	--btnDangerBorder:var(--e100);
+	--btnDangerBg:var(--e200);
+	--btnDangerBgFocus:var(--e300);
+	--btnDangerBorderFocus:var(--e200);
+
+	/* TextInput*/
+	--inputFont:var(--body2);
+	--inputBg:var(--n300);
+	--inputBorder:var(--n400);
+	--inputText:var(--n800);
+	--inputIconBtnBg:var(--n400);
+	--inputPlaceholderText:var(--n600);
+	--inputIconColor:var(--n600);
+	--inputBorderFocus:var(--p900);
+	--inputBorderValid:var(--g300);
+	--inputBorderInvalid:var(--e300);
+
+	/* TextArea */
+	--textAreaFont:var(--body);
+	--textAreaBg:var(--n300);
+	--textAreaBorder:var(--n400);
+	--textAreaText:var(--n800);
+	--textAreaPlaceholderText:var(--n600);
+	--textAreaBorderFocus:var(--p900);
+
+	/* Checkbox */
+	--checkboxSelected:var(--p900);
+	--checkboxUnselected:var(--p600);
+	--checkboxCheck:var(--n100);
+
+	/* Radio */
+	--radioSelected:var(--p900);
+	--radioUnselected:var(--p600);
+
+	/* Spinner */
+	--spinnerIcon:var(--p900);
+	--spinnerIconComplete:var(--n100);
+	--spinnerIconError:var(--n100);
+	--spinnerBgComplete:var(--g300);
+	--spinnerBgError:var(--e300);
+
+	/* Dropdown */
+	--dropdownFont:var(--body2);
+	--dropdownFontOption:var(--body2);
+	--dropdownBg:var(--n300);
+	--dropdownBorder:var(--n400);
+	--dropdownBorderFocus:var(--p900);
+	--dropdownText:var(--n800);
+
+	/* Search */
+	--searchFont:var(--body2);
+	--searchFontOption:var(--body2);
+	--searchBg:var(--n300);
+	--searchBorder:var(--n400);
+	--searchText:var(--n800);
+	--searchIconBtnBg:var(--n400);
+	--searchPlaceholderText:var(--n600);
+	--searchIconColor:var(--n600);
+	--searchBorderFocus:var(--p900);
+	--searchBorderValid:var(--g300);
+	--searchBorderInvalid:var(--e300);
+
+	/* Header */
+	--headerFont:var(--heading1);
+	--headerBg:var(--n300);
+	--headerTextLight:var(--n700);
+	--headerTextDark:var(--n300);
+	--headerBorderBottom:var(--n400)
+
+	/* Backdrop */
+	--backdropColor:var(--n900);
+
+	/* Navbar*/
+	--navBg:var(--p700);
+	--navFont:var(--body);
+	--navBgTitleHover:var(--n800);
+	--navTextTitleHover:var(--n200);
+	--navText:var(--n200);
+	--navIcon:var(--n200);
+
+	/* Sidebar */
+	--sidebarCloseFont:var(--buttons);
+	--sidebarCloseBg:var(--n800);
+	--sidebarCloseBgFocus:var(--n900);
+	--sidebarCloseText:var(--n200);
+	--sidebarCloseTextFocus:var(--n200);
+	--sidebarCloseIcon:var(--n200);
+	--sidebarCloseIconFocus:var(--n200);
+	--sidebarBg:var(--n200);
+
+	/* SidebarLink */
+	--sidebarLinkText:var(--n800);
+	--sidebarLinkBg:var(--n300);
+	--sidebarLinkTextFocus:var(--n800);
+	--sidebarLinkBgFocus:var(--n400);
+	--sidebarLinkBorderBottom:var(--n400);
+	--sidebarLinkBorderBottomFocus:var(--n500);
+	--sidebarLinkFont:var(--body);
+
+	/* SidebarSlot */
+	--sidebarSlotBg:var(--n300);
+	--sidebarSlotBorderBottom:var(--n400);
+	--sidebarSlotText:var(--n800);
+	--sidebarSlotFont:var(--body);
+
+	/* Modal */
+	--modalCloseFont:var(--body2);
+	--modalCloseText:var(--n800);
+	--modalTitleFont:var(--subtitle);
+	--modalBg:var(--n200);
+	--modalFont:var(--body);
+	--modalText:var(--n800);
+	--modalTitleText:var(--n800);
+
+	/* Separator */
+	--separatorBg:var(--n400);
+
+	/* BackToTop */
+	--backToTopBg:var(--p700);
+	--backToTopBgFocus:var(--p900);
+	--backToTopBorder:var(--p600);
+	--backToTopBorderFocus:var(--p800);
+	--backToTopText:var(--n200);
+	--backToTopTextFocus:var(--n200);
+	--backToTopIcon:var(--n200);
+	--backToTopIconFocus:var(--n200);
+
+}
