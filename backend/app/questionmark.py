@@ -7,7 +7,8 @@ import random as RNGesus
 
 with open('books.json') as works:
     books = json.load(works)
-books.pop("GENERAL")
+    books.pop("GENERAL")
+
 
 #probs easier if books were ID'd with a number instead of title
 def get_everything(answers, num):
@@ -17,7 +18,7 @@ def get_everything(answers, num):
         rating = 0
 
         #age preference
-        if answers["age"] >= books[x]["age"] - 2 and answers["age"] <= books[x]["age"] + 2:
+        if answers["age"] <= books[x]["age"] - 2 and answers["age"] >= books[x]["age"] + 2:
             rating += 1
         
 
@@ -80,14 +81,14 @@ def get_everything(answers, num):
         #origin of book preference
         #answers["origin"] = str[] origin(s)
         #books["origin"] = str origin
-        #if books[x]["origin"] in list(answers["origin"]):
-            #rating += 1
+        if books[x]["origin"] in list(answers["origin"]):
+            rating += 1
 
         #language preference
         #answers["language"] = str[] language(s)
         #books["language"] = str language
-        #if books[x]["language"] in list(answers["language"]):
-           # rating += 1
+        if books[x]["language"] in list(answers["language"]):
+            rating += 1
 
         if 'self-published fanfiction' in books[x]["genres"]:
             rating -= 1
