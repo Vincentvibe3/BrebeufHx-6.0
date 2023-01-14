@@ -5,7 +5,7 @@ import random as RNGesus
 #    answers = json.load(preferences)
 
 
-with open('books.json') as works:
+with open("./backend/app/books.json","r") as works:
     books = json.load(works)
 
 user = {
@@ -23,7 +23,7 @@ def get_everything(answers, num):
         rating = 0
 
         #age preference
-        if answers["age"] <= books[x]["age"] - 2 and answers["age"] >= books[x]["age"] + 2:
+        if answers["age"] >= books[x]["age"] - 2 and answers["age"] <= books[x]["age"] + 2:
             rating += 1
         
 
@@ -127,4 +127,4 @@ def get_everything(answers, num):
     #h = k[v.index(max(v))]       (old code but could be useful if ever we revert)
     #return books[h]["name"]
 
-get_everything(user)
+get_everything(user,1)
