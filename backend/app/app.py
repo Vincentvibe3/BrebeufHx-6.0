@@ -36,7 +36,6 @@ def book(book_name):
     if request.method == "GET":
         book_data = data.book_get(book_name)
 
-@bp_home.route('/tags')
 
 '''
 @bp_home.route("/login", methods=("GET", "POST"))
