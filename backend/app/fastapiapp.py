@@ -1,6 +1,4 @@
 
-
-import flask
 import requests
 import base64
 from argon2 import PasswordHasher
@@ -8,7 +6,7 @@ from tinydb.storages import JSONStorage
 from tinydb import TinyDB, Query
 import argon2
 from fastapi import FastAPI
-from pydantic import BaseModel
+
 from book import Book
 
 data = Book()
@@ -48,8 +46,8 @@ async def book(book_name):
 
 @app.post("/register")
 async def register(request:dict):
-    username = request.json["username"]
-    password = request.json["password"]
+    username = request["username"]
+    password = request["password"]
     hashed_password = hasher.hash(password)
     if auth_data.search(Q.username == username) == []:
         auth_data.insert({"username": username, "pass_hash": hashed_password})
@@ -58,8 +56,8 @@ async def register(request:dict):
 
 @app.post("/login")
 async def login(request:dict):  # Logs in and identifies the user
-    username = request.json["username"]
-    password = request.json["password"]
+    username = request["username"]
+    password = request["password"]
     if auth_data.search(Q.username == username) == []:
         return "69420: user doesn't exist"
     hash_pass = auth_data.search(Q.username == username)[0]["pass_hash"]
