@@ -13,17 +13,28 @@
 	let tagsToAdd:string[] = []
 	let pageCount=""
 	let tagsAll:string[] =  []
-	let tagsSuggest:string[] = []
+	let tagsSuggest:string[] = tagsAll
 	let postStatus = "none"
-	let bookLength=""
 	let lengthValid:boolean
+	let ageValid:boolean
+	let yearValid:boolean
 	let author=""
 
 	let numericalRegex = /^[0-9]+$/i
 
 	const verifyBookLength = () => {
-		let matchResult = bookLength.match(numericalRegex)
+		let matchResult = pageCount.match(numericalRegex)
 		lengthValid = matchResult!=null
+	}
+
+	const verifyAge = () => {
+		let matchResult = age.match(numericalRegex)
+		ageValid = matchResult!=null
+	}
+
+	const verifyYear = () => {
+		let matchResult = yearPublished.match(numericalRegex)
+		yearValid = matchResult!=null
 	}
 
 	const submitData = async () => {
@@ -64,7 +75,10 @@
 	}
 
 	const searchInput = (event: any) => {
-		tagsSuggest = tagsAll.filter((value) => value.startsWith(event.detail.text));
+		if (event.detail.text==""){
+			tagsSuggest=tagsAll
+		}
+		tagsSuggest = tagsAll.filter((value) => value.toLowerCase().startsWith(event.detail.text));
 	};
 
 	const removeTag = (value:string) => {
@@ -113,11 +127,11 @@
 	<p>Author</p>
 	<TextInput bind:text={author} placeholder="Author"></TextInput>
 	<p>Target Age</p>
-	<TextInput bind:text={age} placeholder="Age"></TextInput>
+	<TextInput bind:text={age} on:input={verifyAge} bind:valid={ageValid} placeholder="Age"></TextInput>
 	<p>Page Count</p>
 	<TextInput bind:text={pageCount} on:input={verifyBookLength} bind:valid={lengthValid} placeholder="Book Length"></TextInput>
 	<p>Date Published</p>
-	<TextInput bind:text={yearPublished} placeholder="Year published"></TextInput>
+	<TextInput bind:text={yearPublished} on:input={verifyYear} bind:valid={yearValid} placeholder="Year published"></TextInput>
 	<p>Description</p>
 	<TextArea bind:text={description} placeholder="Description"></TextArea>
 	<p>Tags</p>
@@ -125,7 +139,7 @@
 	<p>Added Tags</p>
 	<div class="tagList">
 		{#if tagsToAdd.length == 0}
-			<p>No tags</p>
+			<p style="margin-top:0px;">No tags</p>
 		{/if}
 		{#each tagsToAdd as selectedTag}
 			<div class="tagButtonWrapper">

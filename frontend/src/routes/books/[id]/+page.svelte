@@ -29,7 +29,7 @@
 <main>
 	<h2>A book by {book.author}</h2>
 	<h3>Publishing Date</h3>
-	<p>by {book.yearPublished}</p>
+	<p>{book.yearPublished}</p>
 	<h3>Description</h3>
 	<p>{book.desc}</p>
 	<h3>Tags</h3>

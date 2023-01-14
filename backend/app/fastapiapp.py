@@ -65,8 +65,8 @@ async def register(request: Request, username:str=Form(), password:str=Form()):
     if auth_data.search(Q.username == username) == []:
         auth_data.insert({"username": username, "pass_hash": hashed_password})
         validTokens.append(generate_key())
-        return RedirectResponse(f"{referer}/callback?token=abc", status_code=302)
-    return RedirectResponse(f"{referer}noot noot", status_code=302)
+        return RedirectResponse(f"{referer}/callback?token={generate_key()}", status_code=302)
+    return RedirectResponse(f"{referer}register?failed", status_code=302)
 
 @app.post("/login")
 async def login(request: Request,username:str=Form(), password:str=Form()):  # Logs in and identifies the user
@@ -80,15 +80,13 @@ async def login(request: Request,username:str=Form(), password:str=Form()):  # L
         hasher.verify(hash_pass, password)
         # Generate Token
         validTokens.append(generate_key())
-        return RedirectResponse(f"{referer}callback?token=abc", status_code=302)
+        return RedirectResponse(f"{referer}callback?token={generate_key()}", status_code=302)
     except Exception:
-        return RedirectResponse(f"{referer}login failed", status_code=302)
+        return RedirectResponse(f"{referer}login?failed", status_code=302)
 
 @app.post("/logout")
-async def logout(self, request):
-    token = ''
-    validTokens.remove(token)
-    #request.user.auth_token_delete()
-    
+async def logout(self, request:Request):
+    token=request.cookies.get("token")
+    validTokens.remove(token)    
     logout(request)
     return RedirectResponse(f"{referer}logout successful")
