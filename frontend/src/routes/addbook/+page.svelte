@@ -41,7 +41,7 @@
 			tags:tagsToAdd,
 			length:pageCount
 		}
-		let response = await fetch(`${env.PUBLIC_API_SERVER}:8080/add_book`, {
+		let response = await fetch(`${env.PUBLIC_API_SERVER}/add_book`, {
 			method:"POST",
 			mode:"cors",
 			headers:{

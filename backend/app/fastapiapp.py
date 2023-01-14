@@ -5,9 +5,10 @@ from argon2 import PasswordHasher
 from tinydb.storages import JSONStorage
 from tinydb import TinyDB, Query
 import argon2
-from fastapi import FastAPI
+from fastapi import FastAPI, Form, Request
 from pydantic import BaseModel
 from book import Book
+from fastapi.responses import RedirectResponse
 
 data = Book()
 
@@ -46,25 +47,27 @@ async def book(book_name):
     return book_data
 
 @app.post("/register")
-async def register(request:dict):
-    username = request.json["username"]
-    password = request.json["password"]
+async def register(request: Request, username:str=Form(), password:str=Form()):
+    referer = request.headers["referer"]
+    print(referer)
     hashed_password = hasher.hash(password)
+    print(auth_data.search(Q.username == username))
     if auth_data.search(Q.username == username) == []:
         auth_data.insert({"username": username, "pass_hash": hashed_password})
-        return "200"
+        return RedirectResponse(f"{referer}/callback?token=abc", status_code=302)
     return "69420"
 
 @app.post("/login")
-async def login(request:dict):  # Logs in and identifies the user
-    username = request.json["username"]
-    password = request.json["password"]
+async def login(request: Request,username:str=Form(), password:str=Form()):  # Logs in and identifies the user
+    referer = request.headers["referer"]
+    print(referer)
     if auth_data.search(Q.username == username) == []:
         return "69420: user doesn't exist"
     hash_pass = auth_data.search(Q.username == username)[0]["pass_hash"]
+    print(hash_pass)
     try:
         hasher.verify(hash_pass, password)
         # Generate Token
-        return "login token goes here"
-    finally:
+        return RedirectResponse(f"{referer}callback?token=abc", status_code=302)
+    except Exception:
         return "69420: Login failed"

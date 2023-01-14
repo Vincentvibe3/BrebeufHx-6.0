@@ -11,8 +11,8 @@
 </script>
 <main>
 	<div class="wrapper">
-		<form  action="{env.PUBLIC_API_SERVER}/login" method="post">
-			<h1>Login</h1>
+		<form  action="{env.PUBLIC_API_SERVER}/register" method="post">
+			<h1>Register</h1>
 			<p>Username</p>
 			<TextInput name="username" style="width:100%;" text="" placeholder="Username"></TextInput>
 			<p>Password</p>
