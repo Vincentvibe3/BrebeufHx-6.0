@@ -7,6 +7,8 @@ from tinydb import TinyDB, Query
 import argon2
 from fastapi import FastAPI, Form, Request
 from pydantic import BaseModel
+from fastapi import FastAPI
+
 from book import Book
 from fastapi.responses import RedirectResponse
 import recommendations
@@ -33,18 +35,19 @@ async def hello_world():
 async def get_recommendation(userData:dict):
     return recommendations.get_everything(userData,3)
 
-@app.get("/get_stats")
-async def get_stats():
-    return {"tags": data.tag_list_get(), "genres": data.genre_list_get()}
+@app.get("/get_tags")
+async def get_tags():
+    return data.tag_list_get()
 
 @app.post("/add_book")
 async def add_book(book_data:dict):
-    print("called")
-    return data.book_add(book_data)  # Returns OK
+    return data.book_add(book_data)  # Returns OK or 69420
 
-@app.get("/book/{book_name}")
-async def book(book_name):
-    book_data = data.book_get(book_name)
+@app.get("/book/{book_id}")
+async def book(book_id):
+    if book_id == "ALL":
+        return data.data
+    book_data = data.book_get(book_id)
     return book_data
 
 @app.post("/register")
