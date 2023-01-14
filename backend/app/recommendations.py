@@ -1,6 +1,4 @@
-import json
-import random as RNGesus
-import numpy as np
+
 from book import Book
 
 #with open('answers.json') as preferences:
