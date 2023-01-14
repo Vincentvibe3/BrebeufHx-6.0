@@ -55,14 +55,14 @@ async def register(request: Request, username:str=Form(), password:str=Form()):
     if auth_data.search(Q.username == username) == []:
         auth_data.insert({"username": username, "pass_hash": hashed_password})
         return RedirectResponse(f"{referer}/callback?token=abc", status_code=302)
-    return "69420"
+    return RedirectResponse(f"{referer}noot noot", status_code=302)
 
 @app.post("/login")
 async def login(request: Request,username:str=Form(), password:str=Form()):  # Logs in and identifies the user
     referer = request.headers["referer"]
     print(referer)
     if auth_data.search(Q.username == username) == []:
-        return "69420: user doesn't exist"
+        return RedirectResponse(f"{referer}login failed", status_code=302)
     hash_pass = auth_data.search(Q.username == username)[0]["pass_hash"]
     print(hash_pass)
     try:
@@ -70,4 +70,4 @@ async def login(request: Request,username:str=Form(), password:str=Form()):  # L
         # Generate Token
         return RedirectResponse(f"{referer}callback?token=abc", status_code=302)
     except Exception:
-        return "69420: Login failed"
+        return RedirectResponse(f"{referer}login failed", status_code=302)
