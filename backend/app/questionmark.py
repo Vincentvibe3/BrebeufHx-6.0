@@ -65,7 +65,7 @@ def get_everything(answers, num):
         #books["date"] = int date
         #source : wikipedia and history class in high school
         dateprefs = list(answers["date"])
-        bd = books[x]["date"]
+        bd = books[x]["yearPublished"]
         if bd < 476 and 'antiquity' in dateprefs:
             rating += 1
         if bd >= 476 and bd < 1492 and 'middle ages' in dateprefs:
