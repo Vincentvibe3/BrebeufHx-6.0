@@ -58,7 +58,7 @@ def get_everything(answers, num):
 
 
         #era preference
-        #answers["date"] = 'modern', 'renaissance', 'gothic', 'baroque', 'middle ages', 'antiquity', etc.
+        #answers["date"] = 'contemporary', modern', 'renaissance', 'gothic', 'baroque', 'middle ages', 'antiquity', etc.
         #books["date"] = int date
         #source : wikipedia and history class in high school
         dateprefs = list(answers["date"])
