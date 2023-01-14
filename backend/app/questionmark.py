@@ -6,9 +6,9 @@ import numpy as np
 #    answers = json.load(preferences)
 
 
-with open('books.json') as works:
+with open("./backend/app/books.json","r") as works:
     books = json.load(works)
-    books.pop("GENERAL")
+books.pop("GENERAL")
 
     
 #probs easier if books were ID'd with a number instead of title
@@ -71,8 +71,7 @@ def get_everything(answers, num):
         #books["date"] = int date
         #source : wikipedia and history class in high school
         dateprefs = list(answers["date"])
-        bd = books[x]["date"]
-        eraPrefs = 0
+        bd = books[x]["yearPublished"]
         if bd < 476 and 'antiquity' in dateprefs:
             eraPrefs += 1
         if bd >= 476 and bd < 1492 and 'middle ages' in dateprefs:
@@ -111,23 +110,26 @@ def get_everything(answers, num):
         totalAvg = (agepref + tagsScoreNorm + lengthPref + dateprefs + originPref + languagePref)/6
         ratings.update({x:totalAvg})
 
-    def sort_index(lst, rev=True):
-        index = range(len(lst))
-        s = sorted(index, reverse = rev, key = lambda i: lst[i])
-        return s
+    #def sort_index(lst, rev=True):
+    #      #index = range(len(lst))
+    #    s = sorted(lst, reverse = rev)
+        #key = lambda i:lst[i]
+    #    return s
+    sorted_ratings = sorted(ratings)
 
     #highest rated book(s)
     #def highest_value_titles(num):
     v = list(ratings.values())
     k = list(ratings.keys())
-    s = sort_index(v)[:num]
-    booklist = []
-    for i in range(num):
-            booklist = booklist.append(books[s[num]]["name"])
-
+    #s = sort_index(v)[:num]
+    booklist = {}
+    for i in range(len(ratings)-num):
+        sorted_ratings.pop()
+            #booklist.append(books[sorted_ratings[num]]["name"])
+    for i in sorted_ratings:
+        booklist.update({i:books[i]})
     return booklist
     #or return book ID ig...
 
     #h = k[v.index(max(v))]       (old code but could be useful if ever we revert)
     #return books[h]["name"]
-
