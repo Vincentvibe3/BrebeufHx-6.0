@@ -16,7 +16,7 @@ user = {
 }
 
 #probs easier if books were ID'd with a number instead of title
-def get_everything(answers):
+def get_everything(answers, num):
     ratings = {}
     #ratings = dict()
     for x in books:
@@ -100,6 +100,8 @@ def get_everything(answers):
         #more shit if needed like subjects, time of release (era), author, etc.
         #also pls merge genres and tags in the json
 
+        #Gacha
+        #rating += RNGesus.randint(0,69)
 
         #final update of dict ratings
         ratings.update({x:rating})
@@ -111,18 +113,18 @@ def get_everything(answers):
         return s
 
     #highest rated book(s)
-    def highest_value_titles(num):
-        v = list(ratings.values())
-        k = list(ratings.keys())
-        s = sort_index(v)[:num]
-        booklist = []
-        for i in range(num):
+    #def highest_value_titles(num):
+    v = list(ratings.values())
+    k = list(ratings.keys())
+    s = sort_index(v)[:num]
+    booklist = []
+    for i in range(num):
             booklist = booklist.append(books[s[num]]["name"])
 
-        return booklist
-        #or return book ID ig...
+    return booklist
+    #or return book ID ig...
 
-        #h = k[v.index(max(v))]       (old code but could be useful if ever we revert)
-        #return books[h]["name"]
+    #h = k[v.index(max(v))]       (old code but could be useful if ever we revert)
+    #return books[h]["name"]
 
 get_everything(user)
