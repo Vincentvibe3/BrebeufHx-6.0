@@ -26,7 +26,7 @@ class Book:
 
         for ele in book_data["tags"]:
             if ele not in existing_tags:
-                self.__book_database.table('tags').insert(ele).execute()
+                self.__book_database.table('tags').insert({"name":ele}).execute()
 
         self.data = self.__book_database.table("books").select("*").execute().data
         return "200"
@@ -78,4 +78,14 @@ c.book_add({"name": "Pantheo2323aaaaaaan",
             "author":"MEMEMEMEME",
             "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s"})
 print(c.tag_list_get())
-print(c.data)'''
+print(c.data)
+c = Book()
+c.book_add({"name": "Pantheo2323aaa2aaaanaaaaaa",
+            "desc": "OwO so hot",
+            "age": 18123111,
+            "length": 123,
+            "yearPublished":1984,
+            "tags": ["Tag122222", "SecondTaggggggg"],
+            "author":"MEMEMEMEME",
+            "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s"})
+'''
