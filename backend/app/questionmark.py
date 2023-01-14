@@ -38,15 +38,6 @@ def get_everything(answers, num):
                     tagsScore += 1
         tagsScoreNorm = tagsScore/len(tagsBooks)
 
-        #genre preferences T_T
-        #same as tags really...
-        #genreAns = list(answers["genres"])
-        #genreBooks = list(books[x]["genres"])
-        #for i in range (len(genreAns)):
-        #    for j in range (len(genreBooks)):
-        #        if genreAns[i] == genreBooks[j]:
-        #            rating += 1
-
                 
         #length preference
         #answers["length"] = 'short', 'medium', 'long'
@@ -102,19 +93,15 @@ def get_everything(answers, num):
         #books["language"] = str language
         #languagePref = 0
         #if books[x]["language"] in list(answers["language"]):
-            languagePref = 1
+            #languagePref = 1
 
 
         #final update of dict ratings
     
-        totalAvg = (agepref + tagsScoreNorm + lengthPref + dateprefs + originPref + languagePref)/6
+        totalAvg = (agepref + tagsScoreNorm + 0.7*lengthPref + 0.3*dateprefs)/4
         ratings.update({x:totalAvg})
 
-    #def sort_index(lst, rev=True):
-    #      #index = range(len(lst))
-    #    s = sorted(lst, reverse = rev)
-        #key = lambda i:lst[i]
-    #    return s
+    
     sorted_ratings = sorted(ratings)
 
     #highest rated book(s)
