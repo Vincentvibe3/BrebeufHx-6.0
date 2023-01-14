@@ -7,12 +7,15 @@ from tinydb import TinyDB, Query
 import argon2
 from fastapi import FastAPI, Form, Request
 from pydantic import BaseModel
-from fastapi import FastAPI
-
 from book import Book
 from fastapi.responses import RedirectResponse
 import recommendations
+from uuid import uuid4
+import os
+import binascii
 
+
+validTokens = []
 data = Book()
 
 auth_data = TinyDB('auth.json')
@@ -22,6 +25,9 @@ hasher = PasswordHasher()
 
 
 app = FastAPI()
+
+def generate_key():
+    return binascii.hexlify(os.urandom(20)).decode()
 
 @app.post("/testpost")
 async def testpost(params:dict):
@@ -58,6 +64,7 @@ async def register(request: Request, username:str=Form(), password:str=Form()):
     print(auth_data.search(Q.username == username))
     if auth_data.search(Q.username == username) == []:
         auth_data.insert({"username": username, "pass_hash": hashed_password})
+        validTokens.append(generate_key())
         return RedirectResponse(f"{referer}/callback?token=abc", status_code=302)
     return RedirectResponse(f"{referer}noot noot", status_code=302)
 
@@ -72,6 +79,16 @@ async def login(request: Request,username:str=Form(), password:str=Form()):  # L
     try:
         hasher.verify(hash_pass, password)
         # Generate Token
+        validTokens.append(generate_key())
         return RedirectResponse(f"{referer}callback?token=abc", status_code=302)
     except Exception:
         return RedirectResponse(f"{referer}login failed", status_code=302)
+
+@app.post("/logout")
+async def logout(self, request):
+    token = ''
+    validTokens.remove(token)
+    #request.user.auth_token_delete()
+    
+    logout(request)
+    return RedirectResponse(f"{referer}logout successful")
