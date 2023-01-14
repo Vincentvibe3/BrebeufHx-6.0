@@ -83,7 +83,7 @@
 		if (event.detail.text==""){
 			tagsSuggest=tagsAll
 		}
-		tagsSuggest = tagsAll.filter((value) => value.toLowerCase().startsWith(event.detail.text));
+		tagsSuggest = tagsAll.filter((value) => value.toLowerCase().startsWith(event.detail.text.toLowerCase()));
 	};
 
 	const removeTag = (value:string) => {
