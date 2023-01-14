@@ -18,6 +18,9 @@ for x in books:
     
     ratings.update({x:rating})
 
+    if answers["tags"]
+    
+
 
 
 #def AgeOrNot():
