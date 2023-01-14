@@ -1,6 +1,4 @@
 
-
-import flask
 import requests
 import base64
 from argon2 import PasswordHasher
@@ -39,6 +37,7 @@ async def get_stats():
 
 @app.post("/add_book")
 async def add_book(book_data:dict):
+    print("called")
     return data.book_add(book_data)  # Returns OK
 
 @app.get("/book/{book_name}")

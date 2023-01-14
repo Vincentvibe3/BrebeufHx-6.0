@@ -21,6 +21,7 @@
 	let postStatus = "none"
 	let bookLength=""
 	let lengthValid:boolean
+	let author=""
 
 	let numericalRegex = /^[0-9]+$/i
 
@@ -35,11 +36,12 @@
 			name:title,
 			desc:description,
 			yearPublished:yearPublished,
+			author:author,
 			age:age,
 			tags:tagsToAdd,
 			length:pageCount
 		}
-		let response = await fetch(`${env.PUBLIC_API_SERVER}/addbook`, {
+		let response = await fetch(`${env.PUBLIC_API_SERVER}:8080/add_book`, {
 			method:"POST",
 			mode:"cors",
 			headers:{
@@ -120,14 +122,16 @@
 <main>
 	<p>Title</p>
 	<TextInput bind:text={title} placeholder="Title"></TextInput>
+	<p>Author</p>
+	<TextInput bind:text={author} placeholder="Author"></TextInput>
 	<p>Target Age</p>
 	<TextInput bind:text={age} placeholder="Age"></TextInput>
-	<p>How long do you like your books?</p>
+	<p>Page Count</p>
 	<TextInput bind:text={pageCount} on:input={verifyBookLength} bind:valid={lengthValid} placeholder="Book Length"></TextInput>
 	<p>Date Published</p>
 	<TextInput bind:text={yearPublished} placeholder="Year published"></TextInput>
 	<p>Description</p>
-	<TextArea style="" bind:text={description} placeholder="Description"></TextArea>
+	<TextArea bind:text={description} placeholder="Description"></TextArea>
 	<p>Tags</p>
 	<Searchbar placeholder="Add a tag" bind:suggestions={tagsSuggest} on:optionClick={onTagSelected} on:input={searchInput} bind:text={tagSearchText}></Searchbar>
 	<p>Added Tags</p>
@@ -136,12 +140,14 @@
 			<p>No tags</p>
 		{/if}
 		{#each tagsToAdd as selectedTag}
-			<Button type="secondary" on:click={()=>{removeTag(selectedTag)}}>
-				<slot slot="icon">
-					<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 256 256"><rect width="256" height="256" stroke="none" fill="none"></rect><line x1="200" y1="56" x2="56" y2="200" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="200" y1="200" x2="56" y2="56"stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line></svg>
-				</slot>
-				{selectedTag}
-			</Button>
+			<div class="tagButtonWrapper">
+				<Button type="secondary" on:click={()=>{removeTag(selectedTag)}}>
+					<slot slot="icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 256 256"><rect width="256" height="256" stroke="none" fill="none"></rect><line x1="200" y1="56" x2="56" y2="200" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="200" y1="200" x2="56" y2="56"stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line></svg>
+					</slot>
+					{selectedTag}
+				</Button>
+			</div>
 		{/each}
 	</div>
 	<p>Finish</p>
@@ -151,6 +157,8 @@
 			<Spinner bind:status={postStatus}></Spinner>
 			{#if postStatus=="error"}
 				<p>Something went wrong</p>
+			{:else if postStatus=="complete"}
+				<p>Done</p>
 			{/if}
 		</div>
 	{/if}
@@ -187,6 +195,10 @@
 
 	.statusWrapper p {
 		margin: 0px;
+		margin-left: 1rem;
+	}
+
+	.tagButtonWrapper + .tagButtonWrapper {
 		margin-left: 1rem;
 	}
 

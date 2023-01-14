@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, TextInput } from "nota-ui";
+	import { Button, Dropdown, TextInput } from "nota-ui";
   import TagsDisplay from "./TagsDisplay.svelte";
 
 	let age = "";
@@ -49,6 +49,7 @@
 	<TextInput bind:text={age} on:input={verifyAge} bind:valid={ageValid} placeholder="Age"></TextInput>
 	<p>How long do you like your books?</p>
 	<TextInput bind:text={bookLength} on:input={verifyBookLength} bind:valid={bookValid} placeholder="Book Length"></TextInput>
+	<!-- <Dropdown -->
 	<p>What kind of books do you like?</p>
 	<TagsDisplay bind:tags={tags} bind:selectedTags={selectedTags} ></TagsDisplay>
 	<p>Finish</p>
