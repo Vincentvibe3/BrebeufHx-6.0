@@ -39,7 +39,7 @@ async def hello_world():
 
 @app.post("/get_recommendation")
 async def get_recommendation(userData:dict):
-    return recommendations.get_everything(userData,3)
+   return [ value for value in recommendations.get_everything(userData,3).values()]
 
 @app.get("/get_tags")
 async def get_tags():

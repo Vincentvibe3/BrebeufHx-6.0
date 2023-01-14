@@ -14,11 +14,22 @@
 	let bookLengthOptions:string[] = ["short", "medium", "long"]
 	let tags:string[] = []
 
+	let recs = [{id:1,
+		"name":"",
+		"age":1,
+		"length":1,
+		"yearPublished":1,
+		"tags":[],
+		"author":"",
+		"image":"",
+		"desc":""}]
+
 	onMount(async ()=>{
 		let response = await fetch(`${env.PUBLIC_API_SERVER}/get_tags`, {
 			method:"GET"
 		})
 		tags = JSON.parse(await response.text())
+		recs = []
 	})
 
 	let selectedTags:string[] = []
@@ -29,9 +40,9 @@
 		postStatus = "loading"
 		let user = {
 			date:datePref,
-			age:age,
+			age:parseInt(age),
 			tags:selectedTags,
-			length:bookLength
+			length:parseInt(bookLength)
 		}
 		let response = await fetch(`${env.PUBLIC_API_SERVER}/get_recommendation`, {
 			method:"POST",
@@ -41,10 +52,12 @@
 			},
 			body:JSON.stringify(user)
 		})
+		console.log(response.status)
 		if (response.status!=200){
 			postStatus="error"
 		} else {
 			postStatus="complete"
+			recs = await response.json()
 		}
 	}
 
@@ -101,21 +114,13 @@
 	{/if}
 	<p>Recommended Books</p>
 	<div class="recommendations">
-		<div class="book">
-			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s" alt="book image">
-			<p>Book Title</p>
-			<p>by Author</p>
-		</div>
-		<div class="book">
-			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s" alt="book image">
-			<p>Book Title</p>
-			<p>by Author</p>
-		</div>
-		<div class="book">
-			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s" alt="book image">
-			<p>Book Title</p>
-			<p>by Author</p>
-		</div>
+		{#each recs as book}
+			<div class="book">
+				<img src={book.image} alt="book image">
+				<a href="/books/{book.id}">{book.name}</a>
+				<p>{book.author}</p>
+			</div>
+		{/each}
 	</div>
 </div>
 <style>
@@ -140,19 +145,37 @@
 		justify-content: space-between;
 	}
 
-	.book {
+	/* .book {
 		background-color: var(--n300);
 		padding: 1rem;
 		border-radius: 0.2rem;
 		width: fit-content;
 		margin:0rem 1rem;
+	} */
+
+	.book {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		background-color: var(--n300);
+		padding: 1rem;
+		border-radius: 0.2rem;
+		width: fit-content;
+		margin:1rem 1rem;
 	}
 
 	.book img {
 		border-radius: 00.2rem;
 	}
 
-	.book p + .book p {
+	.book a {
+		text-decoration: none;
+		font:var(--body);
+		margin-top: 1rem;
+	}
+
+	.book a + .book p {
 		margin-top: 1rem;
 	}
 </style>
