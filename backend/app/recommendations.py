@@ -63,6 +63,7 @@ def get_everything(answers, num):
         #books["date"] = int date
         #source : wikipedia and history class in high school
         dateprefs = list(answers["date"])
+        eraPrefs = 0
         bd = books[x]["yearPublished"]
         if bd < 476 and 'antiquity' in dateprefs:
             eraPrefs += 1
