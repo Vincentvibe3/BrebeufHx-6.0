@@ -9,6 +9,7 @@ with open('books.json') as works:
 
 
 ratings = {}
+#ratings = dict()
 
 #probs easier if books were ID'd with a number instead of title
 for x in books:
@@ -19,7 +20,6 @@ for x in books:
         rating += 1
     
 
-
     #tags preference
     tagsAns = list(answers["tags"])
     tagsBooks = list(books[x]["tags"])
@@ -28,6 +28,14 @@ for x in books:
             if tagsAns[i] == tagsBooks[j]:
                 rating += 1
 
+    #genre preferences T_T
+    #same as tags really...
+    genreAns = list(answers["genres"])
+    genreBooks = list(books[x]["genres"])
+    for i in range (len(genreAns)):
+        for j in range (len(genreBooks)):
+            if genreAns[i] == genreBooks[j]:
+                rating += 1
 
             
     #length preference
@@ -35,11 +43,12 @@ for x in books:
     #books["length"] = int page
     #short = 0-100; medium = 101-400; long = 401+
     bl = books[x]["length"]
-    if bl <= 100 and answers["length"] == 'short':
+    al = answers["length"]
+    if bl <= 100 and al == 'short':
         rating += 1
-    elif bl > 100 and bl <= 400 and answers["length"] == 'medium':
+    elif bl > 100 and bl <= 400 and al == 'medium':
         rating += 1
-    elif bl > 400 and answers["length"] == 'long':
+    elif bl > 400 and al == 'long':
         rating += 1
     #stfu bl isn't yaoi
 
@@ -47,6 +56,7 @@ for x in books:
     #era preference
     #answers["date"] = 'modern', 'renaissance', 'gothic', 'baroque', 'middle ages', 'antiquity', etc.
     #books["date"] = int date
+    #source : wikipedia and history class in high school
     dateprefs = list(answers["date"])
     bd = books[x]["date"]
     if bd < 476 and 'antiquity' in dateprefs:
@@ -63,27 +73,45 @@ for x in books:
         rating += 1
     if bd > 1793 and 'contemporary' in dateprefs:
         rating += 1
-    
-    ratings.update({x:rating})
     #this cannot be efficient...
 
 
+    #origin of book preference
+    #answers["origin"] = str[] origin(s)
+    #books["origin"] = str origin
+    if books[x]["origin"] in list(answers["origin"]):
+        rating += 1
+
+    #language preference
+    #answers["language"] = str[] language(s)
+    #books["language"] = str language
+    if books[x]["language"] in list(answers["language"]):
+        rating += 1
 
     #more shit if needed like subjects, time of release (era), author, etc.
     #also pls merge genres and tags in the json
 
-    
-#highest rating book
-def highestValueTitle():
+
+    #final update of dict ratings
+    ratings.update({x:rating})
+
+
+def sort_index(lst, rev=True,):
+    index = range(len(lst))
+    s = sorted(index, reverse = rev, key = lambda i: lst[i])
+    return s
+
+#highest rated book(s)
+def highest_value_titles(num):
     v = list(ratings.values())
     k = list(ratings.keys())
-    h = k[v.index(max(v))]
-    return books[h]["name"]
+    s = sort_index(v)[:num]
+    booklist = []
+    for i in range(num):
+        booklist = booklist.append(books[s[num]]["name"])
+
+    return booklist
     #or return book ID ig...
 
-#also what if more than 1 book recommended
-
-
-
-
-    
+    #h = k[v.index(max(v))]       (old code but could be useful if ever we revert)
+    #return books[h]["name"]
