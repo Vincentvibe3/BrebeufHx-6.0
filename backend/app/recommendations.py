@@ -1,6 +1,7 @@
 import json
 import random as RNGesus
 import numpy as np
+from book import Book
 
 #with open('answers.json') as preferences:
 #    answers = json.load(preferences)
@@ -13,6 +14,16 @@ books.pop("GENERAL")
     
 #probs easier if books were ID'd with a number instead of title
 def get_everything(answers, num):
+    
+    book = Book()
+    book_data = book.data
+
+    books = {}
+
+    for i in book_data:
+        name = i["name"]
+        books[f"{name}"] = i
+    
     ratings = {}
     #ratings = dict()
     for x in books:
