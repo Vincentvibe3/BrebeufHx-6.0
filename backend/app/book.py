@@ -33,7 +33,7 @@ class Book:
 
     def book_get(self, book_id):
         for i in self.data:
-            if i["id"] == book_id:
+            if str(i["id"]) == str(book_id):
                 return i
         return "404"
 
