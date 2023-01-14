@@ -8,6 +8,12 @@ import random as RNGesus
 with open('books.json') as works:
     books = json.load(works)
 
+user = {
+    "age" : 18122,
+    "tags" : ["bunny", "loli", "perywinkle"],
+    "genres" : ["slice of life", "onee-chan", "hot chocolate", "Penis Penis Penis"],
+    "length" : "short"
+}
 
 #probs easier if books were ID'd with a number instead of title
 def get_everything(answers):
@@ -119,3 +125,4 @@ def get_everything(answers):
         #h = k[v.index(max(v))]       (old code but could be useful if ever we revert)
         #return books[h]["name"]
 
+get_everything(user)
