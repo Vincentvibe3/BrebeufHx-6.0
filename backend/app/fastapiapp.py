@@ -9,6 +9,7 @@ from fastapi import FastAPI, Form, Request
 from pydantic import BaseModel
 from book import Book
 from fastapi.responses import RedirectResponse
+import recommendations
 
 data = Book()
 
@@ -28,9 +29,9 @@ async def testpost(params:dict):
 async def hello_world():
     return "helloworld"
 
-@app.get("/get_recommendation")
-async def get_recommendation():
-    pass
+@app.post("/get_recommendation")
+async def get_recommendation(userData:dict):
+    return recommendations.get_everything(userData,3)
 
 @app.get("/get_stats")
 async def get_stats():

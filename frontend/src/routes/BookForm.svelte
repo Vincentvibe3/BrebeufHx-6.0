@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button, Dropdown, TextInput } from "nota-ui";
   import TagsDisplay from "./TagsDisplay.svelte";
+  import { env } from "$env/dynamic/public"
 
 	let age = "";
 	let ageValid:boolean;
@@ -21,11 +22,11 @@
 	let ageRegex = /^[0-9]+$/i
 
 	const submitData = async () => {
-		postStatus = "loading"
+		// postStatus = "loading"
 		let user = {
 			date:datePref,
 			age:age,
-			tags:tagsToAdd,
+			// tags:tagsToAdd,
 			length:bookLength
 		}
 		let response = await fetch(`${env.PUBLIC_API_SERVER}/addbook`, {
@@ -34,13 +35,13 @@
 			headers:{
 				"Content-Type":"application/json"
 			},
-			body:JSON.stringify(book)
+			// body:JSON.stringify(book)
 		})
-		if (response.status!=200){
-			postStatus="error"
-		} else {
-			postStatus="complete"
-		}
+		// if (response.status!=200){
+		// 	postStatus="error"
+		// } else {
+		// 	postStatus="complete"
+		// }
 	}
 
 	const verifyAge = () => {
@@ -53,15 +54,6 @@
 		bookValid = matchResult!=null
 	}
 
-	const submitData = () => {
-		console.log({
-				age:age,
-				pages:bookLength,
-				tags:selectedTags,
-			})
-		// fetch("", 
-		// )
-	}
 
 </script>
 <div class="container">
