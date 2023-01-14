@@ -1,5 +1,7 @@
 import json
 import random as RNGesus
+import numpy as np
+import 
 
 #with open('answers.json') as preferences:
 #    answers = json.load(preferences)
@@ -19,7 +21,7 @@ def get_everything(answers, num):
 
         #age preference
         if answers["age"] <= books[x]["age"] - 2 and answers["age"] >= books[x]["age"] + 2:
-            rating += 1
+            rating += 5
         
 
         #tags preference
@@ -28,7 +30,7 @@ def get_everything(answers, num):
         for i in range (len(tagsAns)):
             for j in range(len(tagsBooks)):
                 if tagsAns[i] == tagsBooks[j]:
-                    rating += 1
+                    rating += 2
 
         #genre preferences T_T
         #same as tags really...
@@ -66,7 +68,7 @@ def get_everything(answers, num):
         if bd >= 476 and bd < 1492 and 'middle ages' in dateprefs:
             rating += 1
         if bd >= 1300 and bd < 1700 and 'renaissance' in dateprefs:
-            rating +=1
+            rating += 1
         if bd >= 1150 and bd <= 1450 and 'gothic' in dateprefs:
             rating += 1
         if bd >= 1600 and bd <= 1750 and 'gothic' in dateprefs:
@@ -90,8 +92,8 @@ def get_everything(answers, num):
         if books[x]["language"] in list(answers["language"]):
             rating += 1
 
-        if 'self-published fanfiction' in books[x]["genres"]:
-            rating -= 1
+        #if 'self-published fanfiction' in books[x]["genres"]:
+        #    rating -= 1
         #more shit if needed like subjects, time of release (era), author, etc.
         #also pls merge genres and tags in the json
 
