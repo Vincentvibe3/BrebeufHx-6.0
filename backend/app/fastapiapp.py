@@ -1,16 +1,21 @@
 
-
-import flask
 import requests
 import base64
 from argon2 import PasswordHasher
 from tinydb.storages import JSONStorage
 from tinydb import TinyDB, Query
 import argon2
-from fastapi import FastAPI
+from fastapi import FastAPI, Form, Request
 from pydantic import BaseModel
 from book import Book
+from fastapi.responses import RedirectResponse
+import recommendations
+from uuid import uuid4
+import os
+import binascii
 
+
+validTokens = []
 data = Book()
 
 auth_data = TinyDB('auth.json')
@@ -21,6 +26,9 @@ hasher = PasswordHasher()
 
 app = FastAPI()
 
+def generate_key():
+    return binascii.hexlify(os.urandom(20)).decode()
+
 @app.post("/testpost")
 async def testpost(params:dict):
     return params
@@ -29,43 +37,58 @@ async def testpost(params:dict):
 async def hello_world():
     return "helloworld"
 
-@app.get("/get_recommendation")
-async def get_recommendation():
-    pass
+@app.post("/get_recommendation")
+async def get_recommendation(userData:dict):
+   return [ value for value in recommendations.get_everything(userData,3).values()]
 
-@app.get("/get_stats")
-async def get_stats():
-    return {"tags": data.tag_list_get(), "genres": data.genre_list_get()}
+@app.get("/get_tags")
+async def get_tags():
+    return data.tag_list_get()
 
 @app.post("/add_book")
 async def add_book(book_data:dict):
-    return data.book_add(book_data)  # Returns OK
+    return data.book_add(book_data)  # Returns OK or 69420
 
-@app.get("/book/{book_name}")
-async def book(book_name):
-    book_data = data.book_get(book_name)
+@app.get("/book/{book_id}")
+async def book(book_id):
+    if book_id == "ALL":
+        return data.data
+    book_data = data.book_get(book_id)
     return book_data
 
 @app.post("/register")
-async def register(request:dict):
-    username = request.json["username"]
-    password = request.json["password"]
+async def register(request: Request, username:str=Form(), password:str=Form()):
+    referer = request.headers["referer"]
+    print(referer)
     hashed_password = hasher.hash(password)
+    print(auth_data.search(Q.username == username))
     if auth_data.search(Q.username == username) == []:
         auth_data.insert({"username": username, "pass_hash": hashed_password})
-        return "200"
-    return "69420"
+        validTokens.append(generate_key())
+        return RedirectResponse(f"{referer}/callback?token=abc", status_code=302)
+    return RedirectResponse(f"{referer}noot noot", status_code=302)
 
 @app.post("/login")
-async def login(request:dict):  # Logs in and identifies the user
-    username = request.json["username"]
-    password = request.json["password"]
+async def login(request: Request,username:str=Form(), password:str=Form()):  # Logs in and identifies the user
+    referer = request.headers["referer"]
+    print(referer)
     if auth_data.search(Q.username == username) == []:
-        return "69420: user doesn't exist"
+        return RedirectResponse(f"{referer}login failed", status_code=302)
     hash_pass = auth_data.search(Q.username == username)[0]["pass_hash"]
+    print(hash_pass)
     try:
         hasher.verify(hash_pass, password)
         # Generate Token
-        return "login token goes here"
-    finally:
-        return "69420: Login failed"
+        validTokens.append(generate_key())
+        return RedirectResponse(f"{referer}callback?token=abc", status_code=302)
+    except Exception:
+        return RedirectResponse(f"{referer}login failed", status_code=302)
+
+@app.post("/logout")
+async def logout(self, request):
+    token = ''
+    validTokens.remove(token)
+    #request.user.auth_token_delete()
+    
+    logout(request)
+    return RedirectResponse(f"{referer}logout successful")
