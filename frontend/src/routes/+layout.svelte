@@ -18,6 +18,7 @@
 	const logOut = () =>{
 		loggedIn=false
 		document.cookie="loggedIn=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;"
+		document.location="/"
 	}
 </script>
 <Navbar on:onTitleClick={toggleSidebar} alwaysOpaque={false} style="top:0px; left:0px; z-index:2;">
