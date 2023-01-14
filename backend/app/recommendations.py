@@ -7,8 +7,9 @@ from book import Book
 #    answers = json.load(preferences)
 
 
-with open("./backend/app/books.json","r") as works:
-    books = json.load(works)
+# with open("./backend/app/books.json","r") as works:
+#     books = json.load(works)
+books={"GENERAL":""}
 books.pop("GENERAL")
 
     
