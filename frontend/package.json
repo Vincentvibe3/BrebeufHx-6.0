@@ -20,6 +20,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-vercel": "^1.0.3",
 		"nota-ui": "^0.0.5"
 	}
 }
