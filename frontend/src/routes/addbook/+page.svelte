@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {Button, Header, Navbar, Searchbar, Sidebar, SidebarLink, Spinner, TextArea, TextInput} from "nota-ui"
 	import { env } from "$env/dynamic/public"
+  import { onMount } from "svelte";
 
 	export let sidebarOpen=false;
 
@@ -97,9 +98,11 @@
 		tagSearchText=""
 	}
 
-	const toggleSidebar = () => {
-		sidebarOpen=true
-	}
+	onMount(()=>{
+		if (!document.cookie.includes("loggedIn=true")){
+			document.location="/"
+		}
+	})
 </script>
 <Header
 	img="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80">

@@ -34,10 +34,13 @@
 	</div>
 </Navbar>
 <Sidebar bind:show={sidebarOpen}>
-	<SidebarLink href=".">Home</SidebarLink>
-	<SidebarLink href="/login">Login</SidebarLink>
-	<SidebarLink href="/register">Register</SidebarLink>
+	<SidebarLink href="/">Home</SidebarLink>
 	<SidebarLink href="/library">Library</SidebarLink>
-	<SidebarLink href="/addbook">Add Book</SidebarLink>
+	{#if loggedIn}
+		<SidebarLink href="/addbook">Add Book</SidebarLink>
+	{:else}
+		<SidebarLink href="/login">Login</SidebarLink>
+		<SidebarLink href="/register">Register</SidebarLink>
+	{/if}
 </Sidebar>
 <slot></slot>
