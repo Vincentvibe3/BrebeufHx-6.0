@@ -1,0 +1,33 @@
+book dictionary contains:
+    name -> String
+    desc -> String
+    tags -> List[String]
+    genres -> List[String]
+    age -> Int
+    Length -> Int
+
+tested:
+    /
+    /get_stats
+    /add_book
+    /book/<book_name>
+
+
+https://url.com/
+    -> Nothing
+
+https://url.com/add_book
+    -> Adds a book to the database
+    -> Returns 200 if successful?
+
+https://url.com/get_stats
+    -> Returns {"tags":[],"genres":[]}
+
+https://url.com/book/<book_name>
+    -> Returns data about <book_name> or 404 if book doesn't exist
+
+(?)https://url.com/login
+    -> Receives username and password as json
+    -> Returns something if login successful?
+
+

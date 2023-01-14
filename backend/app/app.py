@@ -1,5 +1,9 @@
 import flask
 import requests
+import base64
+from tinydb.storages import JSONStorage
+from tinydb import TinyDB, Query
+
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, Flask
@@ -9,22 +13,35 @@ from backend.app import book
 from backend.app.book import Book
 
 data = Book()
+'''
+auth_data = TinyDB('auth.json')
+Q = Query()
+print(auth_data.search(Q.password == "MinasOrDie"))
+'''
+
 bp_home = Blueprint('home', __name__, url_prefix='/')
-bp_book = Blueprint('book',__name__,url_prefix='/')
-#bp_add_book = Blueprint("add_book", __name__, url_prefix='/add_book')
+bp_book = Blueprint('book',__name__,url_prefix='/book')
+
 def create_app():
     app = app = Flask(__name__)
-    app.register_blueprint(bp_home, bp_book)
+    for i in [bp_home,bp_book]:
+        app.register_blueprint(i)
     return app
 
+@bp_home.route('/', methods=('GET', 'POST'))
+def auth():  # Home page
+    return "Hello World"
+@bp_home.route('/get_stats')
+def get_stats():
+    return {"tags":data.tag_list_get(),"genres":data.genre_list_get()}
 
 @bp_home.route('/add_book', methods=('GET', 'POST'))
 def add_book():  # Adds a book to the database
     if request.method == "POST":
         book_data = request.json
-        book.add_book(book_data)
-        return "Hello World2"
-    return "Whatever"
+        return data.book_add(book_data)  # Returns OK
+    return "Not 200"
+
 '''
 @bp_home.route('/questionnaire', methods=('GET', 'POST'))
 def questionnaire():
@@ -35,9 +52,18 @@ def questionnaire():
 def book(book_name):
     if request.method == "GET":
         book_data = data.book_get(book_name)
+        return book_data
+
+@bp_home.route("/register")
+def register():
+    username = request.json["username"]
+    password = request.json["password"]
+    pass
 
 
-'''
-@bp_home.route("/login", methods=("GET", "POST"))
+
+
+
+@bp_home.route("/login", methods=("POST"))
 def login():  # Logs in and identifies the user
-'''
+    return request.json
