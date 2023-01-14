@@ -18,30 +18,31 @@ for x in books:
     if answers["age"] <= books[x]["age"] - 2 and answers["age"] >= books[x]["age"] + 2:
         rating += 1
     
-    #ratings.update({x:rating})
+
 
     #tags preference
     tagsAns = list(answers["tags"])
     tagsBooks = list(books[x]["tags"])
-    for i in tagsAns:
-        for j in tagsBooks:
+    for i in range (len(tagsAns)):
+        for j in range(len(tagsBooks)):
             if tagsAns[i] == tagsBooks[j]:
                 rating += 1
 
-    #ratings.update({x:rating})
+
             
     #length preference
     #answers["length"] = 'short', 'medium', 'long'
     #books["length"] = int page
     #short = 0-100; medium = 101-400; long = 401+
-    if books[x]["length"] <= 100 and answers["length"] == 'short':
+    bl = books[x]["length"]
+    if bl <= 100 and answers["length"] == 'short':
         rating += 1
-    elif books[x]["length"] > 100 and books[x]["length"] <= 400 and answers["length"] == 'medium':
+    elif bl > 100 and bl <= 400 and answers["length"] == 'medium':
         rating += 1
-    elif books[x]["length"] > 400 and answers["length"] == 'long':
+    elif bl > 400 and answers["length"] == 'long':
         rating += 1
-    
-    ratings.update({x:rating})
+    #stfu bl isn't yaoi
+
 
     #era preference
     #answers["date"] = 'modern', 'renaissance', 'gothic', 'baroque', 'middle ages', 'antiquity', etc.
@@ -63,6 +64,7 @@ for x in books:
     if bd > 1793 and 'contemporary' in dateprefs:
         rating += 1
     
+    ratings.update({x:rating})
     #this cannot be efficient...
 
 
