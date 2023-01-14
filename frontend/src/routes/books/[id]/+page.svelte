@@ -32,6 +32,8 @@
 	<p>{book.yearPublished}</p>
 	<h3>Description</h3>
 	<p>{book.desc}</p>
+	<h3>Target Age</h3>
+	<p>{book.age}</p>
 	<h3>Tags</h3>
 	<div class="container">
 		{#each book.tags as tag}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Dropdown, TextInput, Spinner } from "nota-ui";
+	import { Button, Dropdown, TextInput, Spinner, Separator } from "nota-ui";
   import TagsDisplay from "./TagsDisplay.svelte";
   import { env } from "$env/dynamic/public"
   import { onMount } from "svelte";
@@ -75,53 +75,53 @@
 </script>
 <div class="container">
 	<h2>Find books here</h2>
-	<div class="step">
-
-		
-	</div>
-	<p>How old are you?</p>
-	<TextInput bind:text={age} on:input={verifyAge} bind:valid={ageValid} placeholder="Age"></TextInput>
-	<p>How long do you like your books?</p>
-	<Dropdown bind:optionText={bookLength}>
-		<option value="0">Select an option:</option>
-		{#each bookLengthOptions as option}
-			<option value={option}>{option}</option>
-		{/each}	
-	</Dropdown>
-	<p>What era of books do you prefer?</p>
-	<Dropdown bind:optionText={datePref} bind:options={datePrefOptions} >
-		<option value="0">Select an option:</option>
-		{#each datePrefOptions as option}
-			<option value={option}>{option}</option>
-		{/each}	
-	</Dropdown>
-	<p>What kind of books do you like?</p>
-	<TagsDisplay bind:tags={tags} bind:selectedTags={selectedTags} ></TagsDisplay>
-	<p>Finish</p>
-	<Button 
-		on:click={submitData}>
-		Submit
-	</Button>
-	{#if postStatus!="none"}
-		<div class="statusWrapper">
-			<Spinner bind:status={postStatus}></Spinner>
-			{#if postStatus=="error"}
-				<p>Something went wrong</p>
-			{:else if postStatus=="complete"}
-				<p>Done</p>
-			{/if}
+	{#if recs.length != 0}
+		<Button on:click={()=>{recs=[]}}>Restart</Button>
+		<p>Recommended Books</p>
+		<div class="recommendations">
+			{#each recs as book}
+				<div class="book">
+					<img src={book.image} alt="book image">
+					<a href="/books/{book.id}">{book.name}</a>
+					<p>{book.author}</p>
+				</div>
+			{/each}
 		</div>
-	{/if}
-	<p>Recommended Books</p>
-	<div class="recommendations">
-		{#each recs as book}
-			<div class="book">
-				<img src={book.image} alt="book image">
-				<a href="/books/{book.id}">{book.name}</a>
-				<p>{book.author}</p>
+	{:else}
+		<p>How old are you?</p>
+		<TextInput bind:text={age} on:input={verifyAge} bind:valid={ageValid} placeholder="Age"></TextInput>
+		<p>How long do you like your books?</p>
+		<Dropdown bind:optionText={bookLength}>
+			<option value="0">Select an option:</option>
+			{#each bookLengthOptions as option}
+				<option value={option}>{option}</option>
+			{/each}	
+		</Dropdown>
+		<p>What era of books do you prefer?</p>
+		<Dropdown bind:optionText={datePref} bind:options={datePrefOptions} >
+			<option value="0">Select an option:</option>
+			{#each datePrefOptions as option}
+				<option value={option}>{option}</option>
+			{/each}	
+		</Dropdown>
+		<p>What kind of books do you like?</p>
+		<TagsDisplay bind:tags={tags} bind:selectedTags={selectedTags} ></TagsDisplay>
+		<p>Show Me Books</p>
+		<Button 
+			on:click={submitData}>
+			Submit
+		</Button>
+		{#if postStatus!="none"}
+			<div class="statusWrapper">
+				<Spinner bind:status={postStatus}></Spinner>
+				{#if postStatus=="error"}
+					<p>Something went wrong</p>
+				{:else if postStatus=="complete"}
+					<p>Done</p>
+				{/if}
 			</div>
-		{/each}
-	</div>
+		{/if}
+	{/if}
 </div>
 <style>
 	.statusWrapper {

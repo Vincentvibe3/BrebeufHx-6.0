@@ -1,7 +1,6 @@
 <script lang="ts">
-	import {Header, Navbar, Sidebar, SidebarLink, Button} from "nota-ui"
+	import { Navbar, Sidebar, SidebarLink, Button} from "nota-ui"
   import { onMount } from "svelte";
-  	import BookForm from "./BookForm.svelte";
 
 	export let sidebarOpen=false;
 
@@ -26,7 +25,7 @@
 		<svg style="height:100%; width:auto;" xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#ffffff" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"></rect><line x1="40" y1="128" x2="216" y2="128" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="40" y1="64" x2="216" y2="64" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="40" y1="192" x2="216" y2="192" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line></svg>
 	</div>
 	<svelte:fragment slot="title">
-		Books
+		HxBooks
 	</svelte:fragment>
 	<div style="margin:0rem 1.5rem 0rem 1rem; width:100%; display: flex; flex-direction:row; align-items:center; justify-content:end;">
 		{#if loggedIn}

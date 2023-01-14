@@ -159,7 +159,6 @@
 			</div>
 		{/each}
 	</div>
-	<p>Finish</p>
 	<Button on:click={submitData}>Submit</Button>
 	{#if postStatus!="none"}
 		<div class="statusWrapper">
