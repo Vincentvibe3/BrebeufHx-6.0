@@ -1,0 +1,20 @@
+{
+    "GENERAL": {
+        "tags": [
+            "Tag1",
+            "Secondtag",
+            "Tag122222"
+        ]
+    },
+    "Pantheon": {
+        "name": "Pantheon",
+        "desc": "OwO so hot",
+        "age": 18123111,
+        "length": 123,
+        "yearPublished": 1984,
+        "tags": [
+            "Tag122222",
+            "Secondtag"
+        ]
+    }
+}
