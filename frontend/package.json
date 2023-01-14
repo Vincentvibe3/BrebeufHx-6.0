@@ -20,6 +20,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"nota-ui": "^0.0.4"
+		"nota-ui": "^0.0.5"
 	}
 }

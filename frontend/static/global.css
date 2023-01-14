@@ -120,6 +120,7 @@ h2 {
 	--btnSecondaryBg: transparent;
 	--btnSecondaryBgFocus: var(--p200);
 	--btnSecondaryText: var(--p800);
+	--btnSecondaryIcon: var(--p800);
 	--btnSecondaryTextFocus: var(--p800);
 	--btnSecondaryBorder: var(--p800);
 
