@@ -17,9 +17,6 @@ def create_app():
     app.register_blueprint(bp_home, bp_book)
     return app
 
-@bp_home.route('/', methods=('GET', 'POST'))
-def auth():  # Home page
-    return "Hello World"
 
 @bp_home.route('/add_book', methods=('GET', 'POST'))
 def add_book():  # Adds a book to the database
@@ -28,17 +25,18 @@ def add_book():  # Adds a book to the database
         book.add_book(book_data)
         return "Hello World2"
     return "Whatever"
-
+'''
 @bp_home.route('/questionnaire', methods=('GET', 'POST'))
 def questionnaire():
     if request.method == "POST":
         user_preferences = request.json  # answers to the questionnaires
-
+'''
 @bp_book.route('/<book_name>')
 def book(book_name):
     if request.method == "GET":
         book_data = data.book_get(book_name)
 
+@bp_home.route('/tags')
 
 '''
 @bp_home.route("/login", methods=("GET", "POST"))
