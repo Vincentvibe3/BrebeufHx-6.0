@@ -26,7 +26,7 @@ class Book:
 
         for ele in book_data["tags"]:
             if ele not in existing_tags:
-                self.__book_database.table('tags').insert(ele).execute()
+                self.__book_database.table('tags').insert({"name":ele}).execute()
 
         self.data = self.__book_database.table("books").select("*").execute().data
         return "200"
