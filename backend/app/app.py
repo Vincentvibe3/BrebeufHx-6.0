@@ -6,8 +6,9 @@ from flask import (
 )
 
 from backend.app import book
-from backend.app.book import get_book
+from backend.app.book import Book
 
+data = Book()
 bp_home = Blueprint('home', __name__, url_prefix='/')
 bp_book = Blueprint('book',__name__,url_prefix='/')
 #bp_add_book = Blueprint("add_book", __name__, url_prefix='/add_book')
@@ -36,7 +37,7 @@ def questionnaire():
 @bp_book.route('/<book_name>')
 def book(book_name):
     if request.method == "GET":
-        book_data = get_book(book_name)
+        book_data = data.book_get(book_name)
 
 
 '''
