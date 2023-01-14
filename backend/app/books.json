@@ -1,14 +1,43 @@
 {
-    "Monte Cristo": {
-        "desc": "DESCRIPTION",
-        "genre": "Dog",
-        "age": "18+",
-        "length": 0
+    "GENERAL": {
+        "tags": [
+            "Tag1",
+            "SecondTag"
+        ],
+        "genres": [
+            "Dog",
+            "Cat",
+            "Chicken",
+            "Penis"
+        ]
     },
     "Monte Cristo Asd": {
-        "desc": "DESCRIPTION",
-        "genre": "Dog",
-        "age": "18+",
-        "length": 0
+        "desc": "DESCRIPTIONASD",
+        "genres": [
+            "Dog",
+            "Cat",
+            "Chicken"
+        ],
+        "age": 18,
+        "length": 0,
+        "tags": [
+            "Tag1",
+            "SecondTag"
+        ]
+    },
+    "Monte Cristo Asasdad": {
+        "desc": "DESCRIPTIONASD",
+        "genres": [
+            "Dog",
+            "Cat",
+            "Chicken",
+            "Penis"
+        ],
+        "age": 18123,
+        "length": 0,
+        "tags": [
+            "Tag1",
+            "SecondTag"
+        ]
     }
 }
