@@ -167,6 +167,9 @@
 
 	.book img {
 		border-radius: 00.2rem;
+		width: 100%;
+		height: 8rem;
+		object-fit: cover;
 	}
 
 	.book a {

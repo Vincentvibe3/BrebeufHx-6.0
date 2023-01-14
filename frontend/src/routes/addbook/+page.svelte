@@ -19,6 +19,7 @@
 	let ageValid:boolean
 	let yearValid:boolean
 	let author=""
+	let image=""
 
 	let numericalRegex = /^[0-9]+$/i
 
@@ -39,6 +40,9 @@
 
 	const submitData = async () => {
 		postStatus = "loading"
+		if (image==""){
+			image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiICxX7SNshiebtkyqGDBlFSsj6nd4pz7fIJcXwAc&s"
+		}
 		let book = {
 			name:title,
 			desc:description,
@@ -46,7 +50,8 @@
 			author:author,
 			age:age,
 			tags:tagsToAdd,
-			length:pageCount
+			length:pageCount,
+			image:image
 		}
 		let response = await fetch(`${env.PUBLIC_API_SERVER}/add_book`, {
 			method:"POST",
@@ -134,6 +139,8 @@
 	<TextInput bind:text={yearPublished} on:input={verifyYear} bind:valid={yearValid} placeholder="Year published"></TextInput>
 	<p>Description</p>
 	<TextArea bind:text={description} placeholder="Description"></TextArea>
+	<p>Image</p>
+	<TextArea bind:text={image} placeholder="Image"></TextArea>
 	<p>Tags</p>
 	<Searchbar placeholder="Add a tag" bind:suggestions={tagsSuggest} on:optionClick={onTagSelected} on:input={searchInput} bind:text={tagSearchText}></Searchbar>
 	<p>Added Tags</p>
