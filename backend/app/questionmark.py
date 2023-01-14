@@ -9,7 +9,7 @@ with open("./backend/app/books.json","r") as works:
     books = json.load(works)
 books.pop("GENERAL")
 
-#user = {
+
 #    "age" : 18122,
 #   "tags" : ["bunny", "loli", "perywinkle"],
 #    "genres" : ["slice of life", "onee-chan", "hot chocolate", "Penis Penis Penis"],
