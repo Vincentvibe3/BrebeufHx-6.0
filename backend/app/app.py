@@ -34,6 +34,14 @@ def create_app():
 @bp_home.route('/', methods=('GET', 'POST'))
 def auth():  # Home page
     return "Hello World"
+
+@bp_home.route('/get_recommendation')
+def get_recommendation():
+    #request.json will be sent from website
+    #treat request.json with questionmark.py
+    #return recommendation
+    pass
+
 @bp_home.route('/get_stats', methods=('GET', 'POST'))
 def get_stats():
     return {"tags":data.tag_list_get(),"genres":data.genre_list_get()}
