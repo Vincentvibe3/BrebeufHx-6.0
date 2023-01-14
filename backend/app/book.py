@@ -1,51 +1,51 @@
 import json
-
-
+import supabase
+import os
+from supabase import create_client
 class Book:
     def __init__(self):
-        with open("books.json", "r") as file:
-            self.__book_database = json.load(file)
-
-    def __database_update(self):
-        with open("books.json", "w") as file:
-            json.dump(self.__book_database, file, indent=4)
-        with open("books.json", "r") as file:
-            self.__book_database = json.load(file)
-            return self.__book_database
+        self.__book_database = create_client(os.environ["SUPA_URL"],os.environ["SUPA_KEY"])
+        self.__data = self.__book_database.table("books").select("*").execute().data[0]
 
     def book_add(self, book_data):
-        book_data["name"].title()
+        book_data["name"] = book_data["name"].title()
 
-        self.__book_database[book_data["name"]] = book_data
+        for count in range(len(book_data["tags"])):  # Formats tags
+            book_data["tags"][count] = book_data["tags"][count].title()
 
-        for i in ["tags"]:  # Add tags/genres to the GENERAL list of tags/genres
-            for count in range(len(book_data[i])):  # Formats tags/genres
-                book_data[i][count] = book_data[i][count].title()
+        existing_tags = self.__book_database.table("tags").select("*").execute().data
+        existing_tags = [i["name"] for i in existing_tags]
 
-            for ele in book_data[i]:
-                if ele not in self.__book_database["GENERAL"][i]:
-                    self.__book_database["GENERAL"][i].append(ele)
+        try:
+            self.__book_database.table("books").insert(book_data).execute()
+        except:
+            return "69420: book already exists"
 
-        self.__database_update()
+        for ele in book_data["tags"]:
+            if ele not in existing_tags:
+                self.__book_database.table('tags').insert(ele).execute()
+
+        self.__data = self.__book_database.table("books").select("*").execute().data[0]
         return "200"
 
     def book_get(self, book):
-        if book in self.__book_database:
-            return self.__book_database[book]
+        for i in self.__data:
+            if i["name"] == book:
+                return i
         return "404"
 
-    def book_has_tag(self, book, tag):
-        return tag in self.__book_database[book]["tags"]
+    '''def book_has_tag(self, book, tag):
+        return tag in self.__book_database[book]["tags"]'''
 
     '''    def book_has_genre(self, book, genre):
         return genre in self.__book_database[book]["genres"]
     '''
 
-    def tag_list_get(self):
+    '''def tag_list_get(self):
         return self.__book_database["GENERAL"]["tags"]
 
     def tag_exists(self, tag):
-        return tag in self.__book_database["GENERAL"]["tags"]
+        return tag in self.__book_database["GENERAL"]["tags"]'''
 
 '''    def genre_exists(self, genre):
         return genre in self.__book_database["GENERAL"]["genres"]
