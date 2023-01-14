@@ -26,8 +26,8 @@ https://url.com/get_stats
 https://url.com/book/<book_name>
     -> Returns data about <book_name> or 404 if book doesn't exist
 
-(?)https://url.com/login?username=USERNAME&password=PASSWORD
-    -> Receives username and password (text or encrypted?)
+(?)https://url.com/login
+    -> Receives username and password as json
     -> Returns something if login successful?
 
 

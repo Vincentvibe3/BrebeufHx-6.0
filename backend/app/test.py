@@ -7,7 +7,7 @@ dictionary = {"name": "Monte PP",
             "length": 0,
             "tags": ["Tag1", "SecondTag"]}
 c = requests.post("http://127.0.0.1:5000/add_book", json = dictionary)
-c = requests.get("http://127.0.0.1:5000/book/Pantheossssn")
+c = requests.post("http://127.0.0.1:5000/login", json = {"username":"username1"})
 
 print(c.text)
 

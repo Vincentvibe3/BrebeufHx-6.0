@@ -19,7 +19,7 @@ class Book:
         self.__book_database[book_data["name"]] = book_data
 
         for i in ["tags", "genres"]:  # Add tags/genres to the GENERAL list of tags/genres
-            for count in range(len(book_data[i])): # Formats tags/genres
+            for count in range(len(book_data[i])):  # Formats tags/genres
                 book_data[i][count] = book_data[i][count].title()
 
             for ele in book_data[i]:
@@ -33,6 +33,12 @@ class Book:
         if book in self.__book_database:
             return self.__book_database[book]
         return "404"
+
+    def book_has_tag(self, book, tag):
+        return tag in self.__book_database[book]["tags"]
+
+    def book_has_genre(self, book, genre):
+        return genre in self.__book_database[book]["genres"]
 
     def tag_list_get(self):
         return self.__book_database["GENERAL"]["tags"]

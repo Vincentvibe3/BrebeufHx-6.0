@@ -1,5 +1,9 @@
 import flask
 import requests
+import base64
+from tinydb.storages import JSONStorage
+from tinydb import TinyDB, Query
+
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, Flask
@@ -9,6 +13,12 @@ from backend.app import book
 from backend.app.book import Book
 
 data = Book()
+'''
+auth_data = TinyDB('auth.json')
+Q = Query()
+print(auth_data.search(Q.password == "MinasOrDie"))
+'''
+
 bp_home = Blueprint('home', __name__, url_prefix='/')
 bp_book = Blueprint('book',__name__,url_prefix='/book')
 
@@ -44,8 +54,16 @@ def book(book_name):
         book_data = data.book_get(book_name)
         return book_data
 
+@bp_home.route("/register")
+def register():
+    username = request.json["username"]
+    password = request.json["password"]
+    pass
 
-'''
-@bp_home.route("/login", methods=("GET", "POST"))
+
+
+
+
+@bp_home.route("/login", methods=("POST"))
 def login():  # Logs in and identifies the user
-'''
+    return request.json
