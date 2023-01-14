@@ -10,7 +10,6 @@ import argon2
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, Flask
 )
-
 from backend.app import book
 from backend.app.book import Book
 

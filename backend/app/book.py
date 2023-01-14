@@ -18,7 +18,7 @@ class Book:
 
         self.__book_database[book_data["name"]] = book_data
 
-        for i in ["tags", "genres"]:  # Add tags/genres to the GENERAL list of tags/genres
+        for i in ["tags"]:  # Add tags/genres to the GENERAL list of tags/genres
             for count in range(len(book_data[i])):  # Formats tags/genres
                 book_data[i][count] = book_data[i][count].title()
 
@@ -37,8 +37,9 @@ class Book:
     def book_has_tag(self, book, tag):
         return tag in self.__book_database[book]["tags"]
 
-    def book_has_genre(self, book, genre):
+    '''    def book_has_genre(self, book, genre):
         return genre in self.__book_database[book]["genres"]
+    '''
 
     def tag_list_get(self):
         return self.__book_database["GENERAL"]["tags"]
@@ -46,17 +47,18 @@ class Book:
     def tag_exists(self, tag):
         return tag in self.__book_database["GENERAL"]["tags"]
 
-    def genre_exists(self, genre):
+'''    def genre_exists(self, genre):
         return genre in self.__book_database["GENERAL"]["genres"]
 
     def genre_list_get(self):
         return self.__book_database["GENERAL"]["genres"]
-
-
-c = Book()
-c.book_add({"name": "Pantheon",
+'''
+'''
+#c = Book()
+#c.book_add({"name": "Pantheon",
             "desc": "OwO so hot",
-            "genres": ["Leagueoflegos"],
             "age": 18123111,
             "length": 123,
+            "yearPublished":1984,
             "tags": ["Tag122222", "SecondTag"]})
+'''
