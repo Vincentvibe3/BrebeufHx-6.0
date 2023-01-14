@@ -80,14 +80,14 @@ def get_everything(answers, num):
         #origin of book preference
         #answers["origin"] = str[] origin(s)
         #books["origin"] = str origin
-        if books[x]["origin"] in list(answers["origin"]):
-            rating += 1
+        #if books[x]["origin"] in list(answers["origin"]):
+            #rating += 1
 
         #language preference
         #answers["language"] = str[] language(s)
         #books["language"] = str language
-        if books[x]["language"] in list(answers["language"]):
-            rating += 1
+        #if books[x]["language"] in list(answers["language"]):
+           # rating += 1
 
         if 'self-published fanfiction' in books[x]["genres"]:
             rating -= 1
