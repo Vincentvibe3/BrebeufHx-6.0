@@ -1,30 +1,65 @@
 {
-    "0": {
-        "name": "Monte Cristo",
-        "desc": "DESCRIPTION",
-        "genre": "Dog",
-        "age": "18+",
-        "length": 0
+    "GENERAL": {
+        "tags": [
+            "Tag1",
+            "Secondtag",
+            "Tag122222"
+        ],
+        "genres": [
+            "Dog",
+            "Cat",
+            "Chicken",
+            "Penis Penis Penis",
+            "Leagueoflegends",
+            "Penis",
+            "Leagueoflegos"
+        ]
     },
-    "1": {
-        "name": "Monte Cristo",
-        "desc": "DESCRIPTION",
-        "genre": "Dog",
-        "age": "18+",
-        "length": 0
+    "Monte Cristo ASASDADsdASDASDsaadaaaaasd": {
+        "name": "Monte Cristo ASASDADsdASDASDsaadaaaaasd",
+        "desc": "DESCRIPTIONASD",
+        "genres": [
+            "Dog",
+            "Cat",
+            "Chicken",
+            "Penis Penis Penis",
+            "Leagueoflegends"
+        ],
+        "age": 18123,
+        "length": 0,
+        "tags": [
+            "Tag1",
+            "Secondtag"
+        ]
     },
-    "2": {
-        "name": "Monte Cristo",
-        "desc": "DESCRIPTION",
-        "genre": "Dog",
-        "age": "18+",
-        "length": 0
+    "Monte PP": {
+        "name": "Monte PP",
+        "desc": "DESCRIPTIONASD",
+        "genres": [
+            "Dog",
+            "Cat",
+            "Chicken",
+            "Penis",
+            "Leagueoflegends"
+        ],
+        "age": 18123,
+        "length": 0,
+        "tags": [
+            "Tag1",
+            "Secondtag"
+        ]
     },
-    "3": {
-        "name": "Monte Cristo",
-        "desc": "DESCRIPTION",
-        "genre": "Dog",
-        "age": "18+",
-        "length": 0
+    "Pantheon": {
+        "name": "Pantheon",
+        "desc": "OwO so hot",
+        "genres": [
+            "Leagueoflegos"
+        ],
+        "age": 18123111,
+        "length": 123,
+        "tags": [
+            "Tag122222",
+            "Secondtag"
+        ]
     }
 }
