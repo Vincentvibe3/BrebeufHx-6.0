@@ -1,8 +1,8 @@
 import json
 
 
-with open('answers.json') as answers:
-    preferences = json.load(answers)
+with open('answers.json') as preferences:
+    answers = json.load(preferences)
 
 with open('books.json') as works:
     books = json.load(works)
@@ -96,7 +96,7 @@ for x in books:
     ratings.update({x:rating})
 
 
-def sort_index(lst, rev=True,):
+def sort_index(lst, rev=True):
     index = range(len(lst))
     s = sorted(index, reverse = rev, key = lambda i: lst[i])
     return s
