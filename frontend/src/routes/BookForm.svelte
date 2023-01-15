@@ -25,6 +25,7 @@
 		"desc":""}]
 
 	onMount(async ()=>{
+		console.log(env.PUBLIC_API_SERVER)
 		let response = await fetch(`${env.PUBLIC_API_SERVER}/get_tags`, {
 			method:"GET"
 		})
