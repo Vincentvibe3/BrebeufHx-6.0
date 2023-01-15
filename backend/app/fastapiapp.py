@@ -37,7 +37,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+    
+print(os.environ["FRONTEND_ORIGIN"])
 app = FastAPI()
 
 def generate_key():
