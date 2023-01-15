@@ -39,7 +39,6 @@ app.add_middleware(
 )
     
 print(os.environ["FRONTEND_ORIGIN"])
-app = FastAPI()
 
 def generate_key():
     return binascii.hexlify(os.urandom(20)).decode()
