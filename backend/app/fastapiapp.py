@@ -13,7 +13,7 @@ import recommendations
 from uuid import uuid4
 import os
 import binascii
-
+from fastapi.middleware.cors import CORSMiddleware
 
 validTokens = []
 data = Book()
@@ -23,6 +23,20 @@ Q = Query()
 
 hasher = PasswordHasher()
 
+app = FastAPI()
+
+origins = [
+    "http://localhost",
+    os.environ["FRONTEND_ORIGIN"]
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app = FastAPI()
 
